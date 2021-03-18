@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.LinkedList;
 
-public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
+public class WordListAdapter extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private final LinkedList<String> mWordList;
     private LayoutInflater mInflater;
@@ -38,6 +38,11 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     @Override
     public int getItemCount() {
         return mWordList.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+        
     }
 
     class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
