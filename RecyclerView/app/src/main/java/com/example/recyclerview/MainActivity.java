@@ -32,34 +32,56 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int wordListSize = mWordList.size();
+                // add a new word to the wordlist
                 mWordList.addLast("+ Word " + wordListSize);
+                // notify the adapter, that the data has changed
                 mRecyclerView.getAdapter().notifyItemInserted(wordListSize);
+                // scroll to the bottom
                 mRecyclerView.smoothScrollToPosition(wordListSize);
             }
         });
 
+        // put initial data into the word list
         for (int i = 0; i < 20; i++) {
             mWordList.addLast("Word " + i);
         }
 
+        // get a handle to the RecyclerView
         mRecyclerView = findViewById(R.id.recyclerview);
+        // create an adapter and supply the data to be displayed
         mAdapter = new WordListAdapter(this, mWordList);
+        // connect the adapter with the RecyclerView
         mRecyclerView.setAdapter(mAdapter);
+        // give the RecyclerView a default layout manager
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_reset) {
+            // clear all the elements from the list
+            mWordList.clear();
+            // add original data to the list
+            for (int i = 0; i < 20; i++) {
+                mWordList.addLast("Word " + i);
+            }
+            // notify the adapter that the data has changed
+            mRecyclerView.getAdapter().notifyDataSetChanged();
+            // scroll to the top
+            mRecyclerView.smoothScrollToPosition(0);
         }
 
         return super.onOptionsItemSelected(item);

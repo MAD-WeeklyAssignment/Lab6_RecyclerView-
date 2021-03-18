@@ -25,6 +25,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     @Override
     public WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View mItemView = mInflater.inflate(R.layout.wordlist_item, parent, false);
+
         return new WordViewHolder(mItemView, this);
     }
 
@@ -52,9 +53,14 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
         @Override
         public void onClick(View v) {
+            // get the position of the item that was clicked
             int mPosition = getLayoutPosition();
+            // use that to access the affected item in mWorldList
             String element = mWordList.get(mPosition);
+            // change the word in the mWordList
             mWordList.set(mPosition, "Clicked " + element);
+            // notify the adapter, that the data has changed so it can
+            // update the RecyclerView to display the data
             mAdapter.notifyDataSetChanged();
         }
     }
