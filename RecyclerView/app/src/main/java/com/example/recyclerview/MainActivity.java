@@ -30,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+       // Put initial data into the word list
+        for (int i = 0; i < 20; i++) {
+            mWordList.addLast("Word " + i);
+        }
     }
 
     @Override
