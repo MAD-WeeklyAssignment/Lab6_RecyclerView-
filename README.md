@@ -2,10 +2,10 @@
 Create an app that uses a RecyclerView to display a list of recipes.
 
 
-
+RecycleView
 ### <img src="/RecycleIMG/RecycleView.gif" width=300 />
 
-
+challenge
 ### <img src="/RecycleIMG/challenge.gif" width=300 />
 
 
