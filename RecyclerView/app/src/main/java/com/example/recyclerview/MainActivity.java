@@ -13,23 +13,10 @@ public class MainActivity extends AppCompatActivity {
 
     private final LinkedList<FoodRecipe> foodRecipeList = new LinkedList<>();
     // dummy data
-    private final String title = "Lorem Ipsum";
-    private final String briefDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id placerat turpis, quis bibendum magna. Donec pellentesque nisi id libero semper, vitae faucibus turpis malesuada... ";
-    private final ArrayList<String> ingredients = new ArrayList<String>() {
-        {
-            add("Lorem Ipsum");
-            add("Lorem Ipsum");
-            add("Lorem Ipsum");
-            add("Lorem Ipsum");
-            add("Lorem Ipsum");
-            add("Lorem Ipsum");
-            add("Lorem Ipsum");
-            add("Lorem Ipsum");
-            add("Lorem Ipsum");
-            add("Lorem Ipsum");
-        }
-    };
-    private final String procedure = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id placerat turpis, quis bibendum magna. Donec pellentesque nisi id libero semper, vitae faucibus turpis malesuada. Nulla posuere sollicitudin tempor. Sed tincidunt arcu felis, eget condimentum felis porta sit amet. Vivamus cursus mauris eu sapien condimentum laoreet. Donec scelerisque tellus in lorem dictum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur porttitor enim sit amet lectus venenatis varius. Aliquam erat volutpat. Sed lectus nisl, tincidunt non arcu et, cursus pulvinar est.";
+    private String title;
+    private String briefDescription;
+    private ArrayList<String> ingredients;
+    private String procedure;
     private RecyclerView recyclerView;
     private FoodRecipeListAdapter foodRecipeListAdapter;
 
@@ -39,8 +26,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // add data
-        for (int i = 0; i < 20; i++) {
-            FoodRecipe foodRecipe = new FoodRecipe(title, briefDescription, ingredients, procedure, R.drawable.lorem_picsum);
+        for (int i = 1; i <= 20; i++) {
+            title = "Food recipe " + i;
+            briefDescription = "Food recipe " + i + " description";
+            ingredients = new ArrayList<String>() {
+                {
+                    add("Ingredient 1");
+                    add("Ingredient 2");
+                    add("Ingredient 3");
+                    add("Ingredient 4");
+                    add("Ingredient 5");
+                }
+            };
+            procedure = "Procedure " + i;
+            FoodRecipe foodRecipe = new FoodRecipe(title, briefDescription, ingredients, procedure, R.drawable.foodimg);
             foodRecipeList.add(foodRecipe);
         }
 
