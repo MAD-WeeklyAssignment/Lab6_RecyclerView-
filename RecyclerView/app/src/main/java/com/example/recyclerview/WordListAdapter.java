@@ -4,12 +4,23 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.LinkedList;
 
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
+
+    private final LinkedList<String> mWordList;
+    private LayoutInflater mInflater;
+
+    public WordListAdapter(Context context, LinkedList<String> wordList) {
+        mInflater = LayoutInflater.from(context);
+        this.mWordList = wordList;
+    }
     @NonNull
     @Override
-    public WordListAdapter.WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+
+        return new WordViewHolder();
     }
 
     @Override
