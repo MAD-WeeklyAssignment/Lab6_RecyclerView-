@@ -34,4 +34,4 @@ challenge
 ### <img src="/RecycleIMG/Screenshot_1616097319.png" width=300 />
 
 
-### <img src="/RecycleIMG/Screenshot_1616097322.png.png" width=300 />
+### <img src="/RecycleIMG/Screenshot_1616097322.png" width=300 />
