@@ -1,89 +1,56 @@
 package com.example.recyclerview;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final LinkedList<String> mWordList = new LinkedList<>();
-    private RecyclerView mRecyclerView;
-    private WordListAdapter mAdapter;
+    private final LinkedList<FoodRecipe> foodRecipeList = new LinkedList<>();
+    // dummy data
+    private final String title = "Lorem Ipsum";
+    private final String briefDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id placerat turpis, quis bibendum magna. Donec pellentesque nisi id libero semper, vitae faucibus turpis malesuada... ";
+    private final ArrayList<String> ingredients = new ArrayList<String>() {
+        {
+            add("Lorem Ipsum");
+            add("Lorem Ipsum");
+            add("Lorem Ipsum");
+            add("Lorem Ipsum");
+            add("Lorem Ipsum");
+            add("Lorem Ipsum");
+            add("Lorem Ipsum");
+            add("Lorem Ipsum");
+            add("Lorem Ipsum");
+            add("Lorem Ipsum");
+        }
+    };
+    private final String procedure = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id placerat turpis, quis bibendum magna. Donec pellentesque nisi id libero semper, vitae faucibus turpis malesuada. Nulla posuere sollicitudin tempor. Sed tincidunt arcu felis, eget condimentum felis porta sit amet. Vivamus cursus mauris eu sapien condimentum laoreet. Donec scelerisque tellus in lorem dictum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur porttitor enim sit amet lectus venenatis varius. Aliquam erat volutpat. Sed lectus nisl, tincidunt non arcu et, cursus pulvinar est.";
+    private RecyclerView recyclerView;
+    private FoodRecipeListAdapter foodRecipeListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int wordListSize = mWordList.size();
-                // add a new word to the wordlist
-                mWordList.addLast("+ Word " + wordListSize);
-                // notify the adapter, that the data has changed
-                mRecyclerView.getAdapter().notifyItemInserted(wordListSize);
-                // scroll to the bottom
-                mRecyclerView.smoothScrollToPosition(wordListSize);
-            }
-        });
-
-        // put initial data into the word list
+        // add data
         for (int i = 0; i < 20; i++) {
-            mWordList.addLast("Word " + i);
+            FoodRecipe foodRecipe = new FoodRecipe(title, briefDescription, ingredients, procedure, R.drawable.lorem_picsum);
+            foodRecipeList.add(foodRecipe);
         }
 
         // get a handle to the RecyclerView
-        mRecyclerView = findViewById(R.id.recyclerview);
+        recyclerView = findViewById(R.id.recyclerview);
         // create an adapter and supply the data to be displayed
-        mAdapter = new WordListAdapter(this, mWordList);
+        foodRecipeListAdapter = new FoodRecipeListAdapter(this, foodRecipeList);
         // connect the adapter with the RecyclerView
-        mRecyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(foodRecipeListAdapter);
         // give the RecyclerView a default layout manager
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_reset) {
-            // clear all the elements from the list
-            mWordList.clear();
-            // add original data to the list
-            for (int i = 0; i < 20; i++) {
-                mWordList.addLast("Word " + i);
-            }
-            // notify the adapter that the data has changed
-            mRecyclerView.getAdapter().notifyDataSetChanged();
-            // scroll to the top
-            mRecyclerView.smoothScrollToPosition(0);
-        }
-
-        return super.onOptionsItemSelected(item);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
